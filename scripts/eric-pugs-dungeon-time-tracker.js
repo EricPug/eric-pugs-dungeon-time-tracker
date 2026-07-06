@@ -1,6 +1,6 @@
 class EricPugsDungeonTimeTracker extends ActorSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["sheet", "actor", "ericpugs-dungeon-time-tracker"],
       template: "modules/eric-pugs-dungeon-time-tracker/templates/eric-pugs-dungeon-time-tracker.html",
       width: 640,
@@ -40,7 +40,13 @@ class EricPugsDungeonTimeTracker extends ActorSheet {
 
     // Time Started
     data.startHour = this.actor.getFlag("eric-pugs-dungeon-time-tracker", "startHour") || "00:00";
-    data.hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, "0")}:00`);
+    data.hours = Array.from({ length: 24 }, (_, i) => {
+      const value = `${i.toString().padStart(2, "0")}:00`;
+      return {
+        value,
+        selected: value === data.startHour
+      };
+    });
 
     // Total Elapsed Time
     const totalMinutes = checkedCount * 10;

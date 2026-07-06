@@ -13,11 +13,9 @@
         <div class="time-tracking">
           <label for="start-time">Dungeon Time Started:</label>
           <select id="start-time">
-            {{#select startHour}}
-              {{#each hours}}
-                <option value="{{this}}">{{this}}</option>
-              {{/each}}
-            {{/select}}
+            {{#each hours}}
+              <option value="{{value}}" {{#if selected}}selected{{/if}}>{{value}}</option>
+            {{/each}}
           </select>
           <p>Total Elapsed Time: {{elapsedTime}}</p>
           <p>Current Time: {{currentTime}}</p>
